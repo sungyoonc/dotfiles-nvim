@@ -75,7 +75,6 @@ return packer.startup(function(use)
     run = ":MasonUpdate",                 -- :MasonUpdate updates registry contents
   }                                       -- simple to use language server installer
   use "williamboman/mason-lspconfig.nvim" -- simple to use language server installer
-  use 'jose-elias-alvarez/null-ls.nvim'   -- LSP diagnostics and code actions
   use { -- TODO: get configuration from github
     "folke/trouble.nvim",
     requires = {"nvim-tree/nvim-web-devicons"}
