@@ -1,9 +1,12 @@
 local servers = {
-  "rust_analyzer", -- Disabled due to rust-tools
-  "lua_ls",
-	-- "pyright",
-	"jsonls",
-  "bashls",
+  "lua_ls", -- lua
+  "jsonls", -- json
+  "bashls", -- bash
+  "rust_analyzer", -- rust
+  "clangd", -- c language
+  "jdtls", -- java
+  "pyright", -- python
+  "jedi_language_server", -- python
 }
 
 --[[ local formatters = {
@@ -58,7 +61,3 @@ for _, server in pairs(servers) do
 	lspconfig[server].setup(opts)
 end
 
---[[ require("mason-lspconfig").setup({
-	ensure_installed = servers,
-	automatic_installation = true,
-}) ]]
