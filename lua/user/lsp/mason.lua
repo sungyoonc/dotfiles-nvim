@@ -23,6 +23,10 @@ local settings = {
 	max_concurrent_installers = 4,
 }
 
+-- Fix self importing bug
+if package.searchpath('mason', package.path) == "./mason.lua" then
+  return
+end
 require("mason").setup(settings)
 require("mason-lspconfig").setup({
 	ensure_installed = servers,
