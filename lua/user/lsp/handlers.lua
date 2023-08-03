@@ -81,7 +81,7 @@ end
 M.on_attach = function(client, bufnr)
   if client.name == "tsserver" then
     client.server_capabilities.documentFormattingProvider = false
-  elseif client.name == "bash-language-server" then
+  elseif client.name == "bashls" then
     client.server_capabilities.documentFormattingProvider = false
   end
   lsp_keymaps(bufnr)
