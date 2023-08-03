@@ -6,8 +6,8 @@ end
 
 -- Load nvim_cmp and luasnip
 local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
+if not cmp_status_ok or cmp == "require error" then
+	return "require error" -- Prevent require loop
 end
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then

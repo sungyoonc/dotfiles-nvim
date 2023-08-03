@@ -22,9 +22,16 @@ local settings = {
 	log_level = vim.log.levels.INFO,
 	max_concurrent_installers = 4,
 }
-
-require("mason").setup(settings)
-require("mason-lspconfig").setup({
+local mason_status_ok, mason = pcall(require, "mason")
+if not mason_status_ok or mason == "require error" then
+	return "require error" -- Prevent require loop
+end
+mason.setup(settings)
+local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
+if not mason_lspconfig_status_ok or mason_lspconfig == "require error" then
+	return "require error" -- Prevent require loop
+end
+mason_lspconfig.setup({
 	ensure_installed = servers,
 	automatic_installation = true,
 })
