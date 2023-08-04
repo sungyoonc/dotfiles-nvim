@@ -56,7 +56,7 @@ for _, server in pairs(servers) do
 
 	local require_ok, conf_opts = pcall(require, "user.lsp.settings." .. server) -- Load server-specific settings
 	if require_ok then
-		opts = vim.tbl_deep_extend("force", conf_opts, opts)
+		opts = vim.tbl_deep_extend("force", conf_opts, opts) -- opts will override conf_opts
 	end
 	lspconfig[server].setup(opts)
 end
