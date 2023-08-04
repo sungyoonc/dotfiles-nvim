@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+pushd ~/.dotfiles/ > /dev/null
+echo Unstow .dotfiles/nvim
+stow -D --no-folding --target=$HOME nvim
+popd > /dev/null
+echo Stow current directory
+stow --restow  --no-folding --target=$HOME/.config/nvim .
