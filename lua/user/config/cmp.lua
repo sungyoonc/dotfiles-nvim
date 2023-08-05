@@ -1,4 +1,4 @@
-local has_words_before = function()  -- for super-tab mapping
+local has_words_before = function() -- for super-tab mapping
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
@@ -7,7 +7,7 @@ end
 -- Load nvim_cmp and luasnip
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok or cmp == "require error" then
-	return "require error" -- Prevent require loop
+  return "require error" -- Prevent require loop
 end
 local snip_status_ok, luasnip = pcall(require, "luasnip")
 if not snip_status_ok then
@@ -23,31 +23,31 @@ end
 
 local kind_icons = { -- Added extra spacing for better visibility
   Text = "󰉿 ",
-	Method = "󰆧 ",
-	Function = "󰊕 ",
-	Constructor = " ",
+  Method = "󰆧 ",
+  Function = "󰊕 ",
+  Constructor = " ",
   Field = " ",
-	Variable = "󰀫 ",
-	Class = "󰠱 ",
-	Interface = " ",
-	Module = " ",
-	Property = "󰜢 ",
-	Unit = "󰑭 ",
-	Value = "󰎠 ",
-	Enum = " ",
-	Keyword = "󰌋 ",
+  Variable = "󰀫 ",
+  Class = "󰠱 ",
+  Interface = " ",
+  Module = " ",
+  Property = "󰜢 ",
+  Unit = "󰑭 ",
+  Value = "󰎠 ",
+  Enum = " ",
+  Keyword = "󰌋 ",
   Snippet = " ",
-	Color = "󰏘 ",
-	File = "󰈙 ",
+  Color = "󰏘 ",
+  File = "󰈙 ",
   Reference = " ",
-	Folder = "󰉋 ",
-	EnumMember = " ",
-	Constant = "󰏿 ",
+  Folder = "󰉋 ",
+  EnumMember = " ",
+  Constant = "󰏿 ",
   Struct = " ",
-	Event = " ",
-	Operator = "󰆕 ",
+  Event = " ",
+  Operator = "󰆕 ",
   TypeParameter = " ",
-	Misc = " ",
+  Misc = " ",
 }
 -- find more here: https://www.nerdfonts.com/cheat-sheet
 
@@ -59,7 +59,7 @@ cmp.setup({
   },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
-		["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -75,8 +75,8 @@ cmp.setup({
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable() 
-      -- they way you will only jump inside the snippet region
+        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
+        -- they way you will only jump inside the snippet region
       elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
       elseif has_words_before() then
