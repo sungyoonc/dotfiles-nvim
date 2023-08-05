@@ -11,12 +11,14 @@ local M = {
 
   {
     "numToStr/Comment.nvim",
+    event = "VeryLazy",
     opts = {},
   },
 
   -- Preview colors
   {
     "brenoprata10/nvim-highlight-colors",
+    event = "VeryLazy",
     opts = {},
   },
 
@@ -35,6 +37,7 @@ local M = {
   { -- TODO: get configuration from github
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
     opts = {},
   },
 
