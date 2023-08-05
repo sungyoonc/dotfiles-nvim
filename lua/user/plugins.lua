@@ -34,13 +34,12 @@ return {
       "hrsh7th/cmp-cmdline", -- cmdline completions
     },
   },
-  { "hrsh7th/cmp-nvim-lua",  ft = "lua" }, -- cmp source for neovim Lua API (lazyload when file is .lua)
+  { "hrsh7th/cmp-nvim-lua", ft = "lua" }, -- cmp source for neovim Lua API (lazyload when file is .lua)
 
   -- Language Server
   {
-    "williamboman/mason.nvim", -- simple to use language server installer
+    "neovim/nvim-lspconfig",               -- enable LSP
     dependencies = {
-      "neovim/nvim-lspconfig",             -- enable LSP
       "hrsh7th/cmp-nvim-lsp",              -- lsp completions
       "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
     },
@@ -48,6 +47,22 @@ return {
       require "user.lsp"
     end,
   },
+  {
+    "williamboman/mason.nvim", -- simple to use language server installer
+    opts = {
+      ui = {
+        border = "none",
+        icons = {
+          package_installed = "",
+          package_pending = "󱍸",
+          package_uninstalled = "",
+        },
+      },
+      log_level = vim.log.levels.INFO,
+      max_concurrent_installers = 4,
+    }
+  },
+
   { -- TODO: get configuration from github
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
