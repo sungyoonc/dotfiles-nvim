@@ -25,5 +25,3 @@ local lazyconfig = {
 require("lazy").setup("user.plugins", lazyconfig)
 
 require "user.colorscheme"
-require "user.cmp"
-require "user.lsp" -- directory

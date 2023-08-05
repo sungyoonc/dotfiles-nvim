@@ -23,18 +23,32 @@ return {
   },
 
   -- Completion plugins
-  "hrsh7th/nvim-cmp",                     -- The completion plugin
-  "hrsh7th/cmp-buffer",                   -- buffer completions
-  "hrsh7th/cmp-path",                     -- path completions
-  "hrsh7th/cmp-cmdline",                  -- cmdline completions
-  "hrsh7th/cmp-nvim-lsp",                 -- lsp completions
-  { "hrsh7th/cmp-nvim-lua", ft = "lua" }, -- cmp source for neovim Lua API (lazyload when file is .lua)
+  {
+    "hrsh7th/nvim-cmp", -- The completion plugin
+    config = function()
+      require "user.cmp"
+    end,
+    dependencies = {
+      "hrsh7th/cmp-buffer",  -- buffer completions
+      "hrsh7th/cmp-path",    -- path completions
+      "hrsh7th/cmp-cmdline", -- cmdline completions
+    },
+  },
+  { "hrsh7th/cmp-nvim-lua",  ft = "lua" }, -- cmp source for neovim Lua API (lazyload when file is .lua)
 
   -- Language Server
-  "neovim/nvim-lspconfig",             -- enable LSP
-  "williamboman/mason.nvim",           -- simple to use language server installer
-  "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
-  {                                    -- TODO: get configuration from github
+  {
+    "williamboman/mason.nvim", -- simple to use language server installer
+    dependencies = {
+      "neovim/nvim-lspconfig",             -- enable LSP
+      "hrsh7th/cmp-nvim-lsp",              -- lsp completions
+      "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
+    },
+    config = function()
+      require "user.lsp"
+    end,
+  },
+  { -- TODO: get configuration from github
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
