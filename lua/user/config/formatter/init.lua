@@ -1,6 +1,6 @@
 -- Utilities for creating configurations
 local util = require("formatter.util")
-print(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml")
+
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
 require("formatter").setup({
   -- Enable or disable logging
