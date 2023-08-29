@@ -12,7 +12,7 @@ return {
 			"williamboman/mason.nvim",
 		},
 		config = function()
-			require("user.config.formatter.tool_installer") -- require your null-ls config here (example below)
+			require("user.config.formatter.tool_installer")
 		end,
 	},
 }
