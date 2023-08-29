@@ -5,8 +5,8 @@ local M = {
     event = "InsertEnter",
     opts = {},
     config = function()
-      require "user.config.autopairs"
-    end
+      require("user.config.autopairs")
+    end,
   },
 
   {
@@ -30,8 +30,8 @@ local M = {
       ts_update()
     end,
     config = function()
-      require "user.config.treesitter"
-    end
+      require("user.config.treesitter")
+    end,
   },
 
   { -- TODO: get configuration from github
@@ -45,20 +45,19 @@ local M = {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-media-files.nvim",
     },
     keys = {
       { "<leader>f", desc = "Telescope" },
     },
     cmd = {
-      "Telescope"
+      "Telescope",
     },
     config = function()
-      require "user.config.telescope"
-    end
+      require("user.config.telescope")
+    end,
   },
-
 
   -- Markdown Preview
   {
@@ -81,7 +80,7 @@ local M = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   },
 }
 

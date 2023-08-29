@@ -72,7 +72,7 @@ local function lsp_keymaps(bufnr)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   -- vim.cmd [[ command! Format execute "lua vim.lsp.buf.format()" ]]
@@ -80,10 +80,10 @@ end
 
 M.on_attach = function(client, bufnr)
   -- Load server-specific language server capabilities settings
-	local require_ok, conf_capa = pcall(require, "user.lsp.server_settings." .. client.name)
+  local require_ok, conf_capa = pcall(require, "user.lsp.server_settings." .. client.name)
   if require_ok then
     client.server_capabilities = vim.tbl_extend("force", client.server_capabilities, conf_capa)
-	end
+  end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end

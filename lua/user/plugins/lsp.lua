@@ -2,13 +2,13 @@
 local M = {
   -- Language Server
   {
-    "neovim/nvim-lspconfig",               -- enable LSP
+    "neovim/nvim-lspconfig", -- enable LSP
     dependencies = {
       "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
-      "hrsh7th/cmp-nvim-lsp",              -- lsp completions
+      "hrsh7th/cmp-nvim-lsp", -- lsp completions
     },
     config = function()
-      require "user.lsp"
+      require("user.lsp")
     end,
   },
   {
@@ -24,7 +24,7 @@ local M = {
       },
       log_level = vim.log.levels.INFO,
       max_concurrent_installers = 4,
-    }
+    },
   },
 
   -- Language Specific
