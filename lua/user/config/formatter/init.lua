@@ -1,8 +1,8 @@
 -- Utilities for creating configurations
-local util = require "formatter.util"
-
+local util = require("formatter.util")
+print(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml")
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
-require("formatter").setup {
+require("formatter").setup({
   -- Enable or disable logging
   logging = true,
   -- Set the log level
@@ -14,7 +14,22 @@ require("formatter").setup {
     --
     -- https://github.com/mhartington/formatter.nvim/tree/master/lua/formatter/filetypes
     lua = {
-      require("formatter.filetypes.lua").stylua,
+      -- require("formatter.filetypes.lua").stylua,
+      function()
+        return {
+          exe = "stylua",
+          args = {
+            "--search-parent-directories",
+            "--stdin-filepath",
+            util.escape_path(util.get_current_buffer_file_path()),
+            "--config-path",
+            util.escape_path(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml"),
+            "--",
+            "-",
+          },
+          stdin = true,
+        }
+      end,
     },
     python = {
       require("formatter.filetypes.python").black,
@@ -42,5 +57,5 @@ require("formatter").setup {
     --   -- filetype
     --   require("formatter.filetypes.any").remove_trailing_whitespace
     -- },
-  }
-}
+  },
+})
