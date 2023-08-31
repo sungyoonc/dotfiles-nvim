@@ -39,7 +39,7 @@ local options = {
   showtabline = 1, -- show tabline(tab list) (0: never 1: only if there are at least two tab pages 2: always)
   cmdheight = 1, -- more space in the neovim command line for displaying messages
   timeoutlen = 1000, -- time to wait for a mapped key sequence to complete (in milliseconds)
-  showmode = false, -- we don't need to see things like -- INSERT -- anymore
+  showmode = true, -- show modes like -- INSERT --
 
   splitbelow = true, -- force all horizontal splits to go below current window
   splitright = true, -- force all vertical splits to go to the right of current window
