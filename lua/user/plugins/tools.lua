@@ -1,6 +1,16 @@
 -- Quality of Life Plugins
 local M = {
   {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = {
+      "williamboman/mason.nvim",
+    },
+    config = function()
+      require("user.config.mason_tool_installer")
+    end,
+  },
+  {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     opts = {},
