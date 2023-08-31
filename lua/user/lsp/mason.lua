@@ -9,10 +9,6 @@ local servers = {
   "jedi_language_server", -- python
 }
 
---[[ local formatters = {
-  "shfmt"
-} ]]
-
 local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not mason_lspconfig_status_ok or mason_lspconfig == "require error" then
   return "require error" -- Prevent require loop

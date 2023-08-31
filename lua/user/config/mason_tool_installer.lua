@@ -1,3 +1,11 @@
+local debuggers = {
+  -- c, cpp, rust
+  "cpptools",
+  -- python
+  "debugpy",
+  -- java
+  "java-debug-adapter",
+}
 local formatters = {
   -- lua
   "stylua",
@@ -16,7 +24,7 @@ require("mason-tool-installer").setup({
 
   -- a list of all tools you want to ensure are installed upon
   -- start; they should be the names Mason uses for each tool
-  ensure_installed = formatters,
+  ensure_installed = vim.tbl_extend("keep", debuggers, formatters),
 
   -- if set to true this will check each tool for updates. If updates
   -- are available the tool will be updated. This setting does not
