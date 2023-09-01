@@ -26,7 +26,7 @@ require("nvim-treesitter.configs").setup({
     -- disable = { "" }, -- list of language that will be disabled
     -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
     disable = function(lang, bufnr)
-      local is_large = vim.api.nvim_buf_line_count(bufnr) > 50
+      local is_large = vim.api.nvim_buf_line_count(bufnr) > 2000
       if is_large then
         print("Tree-sitter disabled due to code size.")
         return true
