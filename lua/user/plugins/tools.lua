@@ -69,13 +69,22 @@ local M = {
     end,
   },
 
+  -- REPL
+  {
+    "Vigemus/iron.nvim",
+    ft = { "python" },
+    config = function()
+      require("user.config.iron")
+    end,
+  },
+
   -- Markdown Preview
   {
     "iamcco/markdown-preview.nvim",
+    ft = "markdown",
     config = function()
       vim.fn["mkdp#util#install"]()
     end,
-    ft = "markdown",
   },
 
   -- Key Binding Popup
