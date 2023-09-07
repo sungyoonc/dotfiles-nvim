@@ -20,11 +20,14 @@ local formatters = {
   "clang-format",
 }
 
-require("mason-tool-installer").setup({
+local tool_list = {}
+vim.list_extend(tool_list, debuggers)
+vim.list_extend(tool_list, formatters)
 
+require("mason-tool-installer").setup({
   -- a list of all tools you want to ensure are installed upon
   -- start; they should be the names Mason uses for each tool
-  ensure_installed = vim.tbl_extend("keep", debuggers, formatters),
+  ensure_installed = tool_list,
 
   -- if set to true this will check each tool for updates. If updates
   -- are available the tool will be updated. This setting does not
