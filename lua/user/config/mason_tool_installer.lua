@@ -19,10 +19,18 @@ local formatters = {
   -- c, java
   "clang-format",
 }
+local linters = {
+  -- python
+  "ruff",
+  -- c, cpp
+  "cpplint",
+}
+
 
 local tool_list = {}
 vim.list_extend(tool_list, debuggers)
 vim.list_extend(tool_list, formatters)
+vim.list_extend(tool_list, linters)
 
 require("mason-tool-installer").setup({
   -- a list of all tools you want to ensure are installed upon
