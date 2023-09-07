@@ -87,9 +87,27 @@ M.on_attach = function(client, bufnr)
   if conf_ok then
     client.server_capabilities = vim.tbl_extend("force", client.server_capabilities, conf_capa)
   end
-  lsp_keymaps(bufnr)
-  lsp_highlight_document(client)
+
+  -- Enable inlay hints
+  if client.server_capabilities.inlayHintProvider then
+    vim.lsp.inlay_hint(bufnr, true)
+  end
 end
+-- https://github.com/neovim/nvim-lspconfig#suggested-configuration
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+  callback = function(ev)
+    local bufnr = ev.buf
+    local client = vim.lsp.get_client_by_id(ev.data.client_id)
+    if client == nil then
+      print("Failed to get LSP client")
+      return
+    end
+
+    lsp_keymaps(bufnr)
+    lsp_highlight_document(client)
+  end,
+})
 
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if status_ok then
