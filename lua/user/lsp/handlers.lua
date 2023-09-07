@@ -47,16 +47,19 @@ end
 local function lsp_highlight_document(client)
   -- Set autocommands conditional on server_capabilities
   if client.server_capabilities.documentHighlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
+    local lsp_doc_highlight_augroup = vim.api.nvim_create_augroup("lsp_document_highlight", {})
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = lsp_doc_highlight_augroup,
+      callback = function()
+        vim.lsp.buf.document_highlight()
+      end,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = lsp_doc_highlight_augroup,
+      callback = function()
+        vim.lsp.buf.clear_references()
+      end,
+    })
   end
 end
 
@@ -80,8 +83,8 @@ end
 
 M.on_attach = function(client, bufnr)
   -- Load server-specific language server capabilities settings
-  local require_ok, conf_capa = pcall(require, "user.lsp.server_settings." .. client.name)
-  if require_ok then
+  local conf_ok, conf_capa = pcall(require, "user.lsp.server_settings." .. client.name)
+  if conf_ok then
     client.server_capabilities = vim.tbl_extend("force", client.server_capabilities, conf_capa)
   end
   lsp_keymaps(bufnr)
