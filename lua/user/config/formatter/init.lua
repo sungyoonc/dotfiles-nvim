@@ -44,7 +44,21 @@ require("formatter").setup({
       require("formatter.filetypes.sh").shfmt,
     },
     c = {
-      require("formatter.filetypes.c").clangformat,
+      -- require("formatter.filetypes.c").clangformat,
+      function()
+        return {
+          exe = "clang-format",
+          args = {
+            "-assume-filename",
+            util.escape_path(util.get_current_buffer_file_name()),
+            "-style",
+            "file:"
+              .. util.escape_path(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml"),
+          },
+          stdin = true,
+          try_node_modules = true,
+        }
+      end,
     },
     java = {
       require("formatter.filetypes.java").clangformat,
