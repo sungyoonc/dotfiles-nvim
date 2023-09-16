@@ -47,7 +47,10 @@ local M = {
   { -- TODO: get configuration from github
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    event = "VeryLazy",
+    cmd = {
+      "Trouble",
+      "TroubleToggle",
+    },
     opts = {},
   },
 

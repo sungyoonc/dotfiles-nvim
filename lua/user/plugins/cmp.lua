@@ -3,6 +3,7 @@ local M = {
   -- Completion
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     config = function()
       require("user.config.cmp")
     end,
