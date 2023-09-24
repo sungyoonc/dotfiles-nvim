@@ -6,6 +6,7 @@ local servers = {
   "jdtls", -- java
   "pyright", -- python
   "jedi_language_server", -- python
+  "ansiblels" -- ansible
 }
 local custom_servers = {
   "rust_analyzer", -- rust

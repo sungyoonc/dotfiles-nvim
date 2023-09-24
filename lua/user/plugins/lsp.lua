@@ -34,6 +34,10 @@ local M = {
   --     require "user.config.rust-tools"
   --   end,
   -- }, -- better rust lsp intergration
+  {
+    "pearofducks/ansible-vim",
+    ft = { "yaml" },
+  },
 }
 
 return M

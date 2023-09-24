@@ -6,14 +6,17 @@ lint.linters_by_ft = {
   },
   cpp = {
     "cpplint"
-  }
+  },
+  ansible = {
+    "ansible_lint"
+  },
 }
 
 -- Clone from another ft
 lint.linters_by_ft.c = lint.linters_by_ft.cpp
 
 -- autocmd
-vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     callback = function()
         local lint_ok, lint = pcall(require, "lint")
         if lint_ok then
