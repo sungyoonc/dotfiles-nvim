@@ -1,6 +1,6 @@
 local debuggers = {
   -- c, cpp, rust
-  "cpptools",
+  "codelldb",
   -- python
   "debugpy",
   -- java
