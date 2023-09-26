@@ -8,7 +8,7 @@ local M = {
       "hrsh7th/cmp-nvim-lsp", -- lsp completions
     },
     config = function()
-      require("user.lsp")
+      require("user.config.lsp")
     end,
   },
   {
