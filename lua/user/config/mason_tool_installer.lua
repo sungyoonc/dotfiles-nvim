@@ -11,6 +11,7 @@ local formatters = {
   "stylua",
   -- python
   "black",
+  "isort",
   -- rust
   --   should be installed via rustup
   --   https://github.com/rust-lang/rustfmt#quick-start

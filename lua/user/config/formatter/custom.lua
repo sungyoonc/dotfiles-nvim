@@ -1,36 +1,69 @@
--- Utilities for creating configurations
-local util = require("formatter.util")
+local util = require("conform.util")
 
 local M = {}
 
-M.stylua = function()
-  return {
-    exe = "stylua",
-    args = {
+M.custom_stylua = {
+  meta = {
+    url = "https://github.com/JohnnyMorganz/StyLua",
+    description = "An opinionated code formatter for Lua.",
+  },
+  command = "stylua",
+  args = {
+    "--search-parent-directories",
+    "--stdin-filepath",
+    "$FILENAME",
+    "--config-path",
+    vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml",
+    "-",
+  },
+  range_args = function(ctx)
+    local start_offset, end_offset = util.get_offsets_from_range(ctx.buf, ctx.range)
+    return {
       "--search-parent-directories",
       "--stdin-filepath",
-      util.escape_path(util.get_current_buffer_file_path()),
+      "$FILENAME",
       "--config-path",
-      util.escape_path(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml"),
-      "--",
+      vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml",
+      "--range-start",
+      tostring(start_offset),
+      "--range-end",
+      tostring(end_offset),
       "-",
-    },
-    stdin = true,
-  }
-end
+    }
+  end,
+  cwd = util.root_file({
+    ".stylua.toml",
+    "stylua.toml",
+  }),
+}
 
-M.clangformat = function()
-  return {
-    exe = "clang-format",
-    args = {
+M.custom_clang_format = {
+  meta = {
+    url = "https://www.kernel.org/doc/html/latest/process/clang-format.html",
+    description = "Tool to format C/C++/… code according to a set of rules and heuristics.",
+  },
+  command = "clang-format",
+  args = {
+    "-assume-filename",
+    "$FILENAME",
+    "-style",
+    "file:" .. vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml",
+    true,
+  },
+  range_args = function(ctx)
+    local start_offset, end_offset = util.get_offsets_from_range(ctx.buf, ctx.range)
+    local length = end_offset - start_offset
+    return {
       "-assume-filename",
-      util.escape_path(util.get_current_buffer_file_name()),
+      "$FILENAME",
       "-style",
-      "file:" .. util.escape_path(vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml"),
-    },
-    stdin = true,
-    try_node_modules = true,
-  }
-end
+      "file:" .. vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml",
+      "--offset",
+      tostring(start_offset),
+      "--length",
+      tostring(length),
+    }
+  end,
+}
 
 return M
