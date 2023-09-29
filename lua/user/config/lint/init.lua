@@ -2,13 +2,13 @@ local lint = require("lint")
 
 lint.linters_by_ft = {
   python = {
-    "ruff"
+    "ruff",
   },
   cpp = {
-    "cpplint"
+    "cpplint",
   },
   ansible = {
-    "ansible_lint"
+    "ansible_lint",
   },
 }
 
@@ -17,10 +17,7 @@ lint.linters_by_ft.c = lint.linters_by_ft.cpp
 
 -- autocmd
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-    callback = function()
-        local lint_ok, lint = pcall(require, "lint")
-        if lint_ok then
-            lint.try_lint()
-        end
-    end,
+  callback = function()
+    require("lint").try_lint()
+  end,
 })
