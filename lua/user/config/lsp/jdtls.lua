@@ -1,13 +1,28 @@
+local jdtls = require("jdtls")
 local java_cmds = vim.api.nvim_create_augroup("java_cmds", { clear = true })
 local root_files = {
   -- 💀
-  -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
-  ".git",
-  "mvnw",
-  "gradlew",
-  "pom.xml",
-  "build.gradle",
+  main = {
+    -- Git
+    ".git",
+    -- Ant
+    "build.xml",
+    -- Maven
+    "mvnw",
+    "pom.xml",
+    -- Gradle
+    "gradlew",
+    "settings.gradle",
+    "settings.gradle.kts",
+    -- Intellij
+    ".idea",
+  },
+  fallback = {
+    -- Gradle multi-module project
+    "build.gradle",
+    "build.gradle.kts",
+  },
 }
 local features = {
   codelens = {
@@ -24,10 +39,19 @@ local features = {
   },
 }
 
+local root_dir = jdtls.setup.find_root(root_files.main) or jdtls.setup.find_root(root_files.fallback)
+
 local function workspace_dir()
+  -- See `data directory configuration` section in the README
   -- If you started neovim within `~/dev/xy/project-1` this would resolve to `project-1`
-  local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  local dir = vim.fn.fnamemodify("~/.java/jdtls/workspace/", ":p") .. project_name
+  local dir
+
+  if root_dir == nil then
+    dir = vim.fn.fnamemodify("~/.java/jdtls/workspace/standalone/", ":p")
+  else
+    local project_name = vim.fn.fnamemodify(root_dir, ":p:h:t")
+    dir = vim.fn.fnamemodify("~/.java/jdtls/workspace/projects/", ":p") .. project_name
+  end
   return dir
 end
 
@@ -47,8 +71,6 @@ local jdtls_setup = {
     -- if you want to use additional eclipse.jdt.ls plugins.
     --
     -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-    --
-    -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     bundles = {
       vim.fn.stdpath("data") .. "/mason/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar",
     },
@@ -58,12 +80,9 @@ local jdtls_setup = {
   cmd = {
     -- The command that starts the language server
     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
-    -- stylua: ignore
-
     -- 💀
     "java", -- or '/path/to/java17_or_newer/bin/java'
     -- depends on if `java` is in your $PATH env variable and if it points to the right version.
-
     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
     "-Dosgi.bundles.defaultStartLevel=4",
     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -78,18 +97,11 @@ local jdtls_setup = {
 
     -- 💀
     "-jar", vim.fn.stdpath("data") .. "/mason/share/jdtls/plugins/org.eclipse.equinox.launcher.jar",
-    -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^                                       ^^^^^^^^^^^^^^
-    -- Must point to the                                                     Change this to
-    -- eclipse.jdt.ls installation                                           the actual version
 
     -- 💀
     "-configuration", vim.fn.stdpath("data") .. "/mason/share/jdtls/config",
-    -- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^        ^^^^^^
-    -- Must point to the                      Change to one of `linux`, `win` or `mac`
-    -- eclipse.jdt.ls installation            Depending on your system.
 
     -- 💀
-    -- See `data directory configuration` section in the README
     "-data", workspace_dir(),
   },
 }
@@ -108,8 +120,8 @@ local function enable_codelens(bufnr)
 end
 
 local function enable_debugger(bufnr, test_enabled)
-  require("jdtls").setup_dap({ hotcodereplace = "auto" })
-  require("jdtls.dap").setup_dap_main_class_configs()
+  jdtls.setup_dap({ hotcodereplace = "auto" })
+  jdtls.dap.setup_dap_main_class_configs()
 
   if test_enabled then
     local opts = { buffer = bufnr }
@@ -144,7 +156,7 @@ local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = jdtls_setup.cmd,
-  root_dir = require("jdtls.setup").find_root(root_files),
+  root_dir = root_dir,
   on_attach = jdtls_on_attach,
   settings = jdtls_setup.settings,
   init_options = jdtls_setup.init_options,
@@ -157,4 +169,4 @@ local config = {
 -- To make it be managed without lazy.nvim consider making a ftplugin or autocmd
 -- - ftplugin: https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
 -- - autocmd: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/guides/setup-with-nvim-jdtls.md#working-with-nvim-jdtls
-require("jdtls").start_or_attach(config)
+jdtls.start_or_attach(config)
