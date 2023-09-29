@@ -38,6 +38,13 @@ local M = {
     "pearofducks/ansible-vim",
     ft = { "yaml" },
   },
+  {
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+    config = function()
+      require("user.config.lsp.jdtls")
+    end,
+  },
 }
 
 return M

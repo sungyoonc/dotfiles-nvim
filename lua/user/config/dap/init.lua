@@ -40,5 +40,4 @@ end
 
 require("user.config.dap.cpp")
 require("user.config.dap.rust")
-require("user.config.dap.java")
 require("user.config.dap.python")

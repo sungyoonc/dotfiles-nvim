@@ -3,7 +3,6 @@ local servers = {
   "jsonls", -- json
   "bashls", -- bash
   "clangd", -- c language
-  "jdtls", -- java
   "pyright", -- python
   "jedi_language_server", -- python
   "ansiblels" -- ansible

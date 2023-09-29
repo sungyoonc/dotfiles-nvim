@@ -1,3 +1,4 @@
+-- This setting is for nvim-lspconfig setup for jdtls
 return {
   initializationOptions = {
     bundles = {
