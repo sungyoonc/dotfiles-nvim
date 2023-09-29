@@ -104,6 +104,12 @@ local M = {
       -- refer to the configuration section below
     },
   },
+  {
+    "kosayoda/nvim-lightbulb",
+    config = {
+      autocmd = { enabled = true },
+    },
+  },
 }
 
 return M
