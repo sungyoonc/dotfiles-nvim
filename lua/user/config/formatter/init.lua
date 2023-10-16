@@ -1,5 +1,4 @@
 local conform = require("conform")
-local util = require("conform.util")
 
 -- Full Options: https://github.com/stevearc/conform.nvim#options
 conform.setup({
@@ -20,30 +19,17 @@ conform.setup({
 })
 
 -- Add args to existing formatters
---   https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#add-extra-arguments-to-a-formatter-command
-local stylua = require("conform.formatters.stylua")
-conform.formatters.stylua = vim.tbl_deep_extend("force", stylua, {
-  args = util.extend_args(
-    stylua.args,
-    { "--config-path", vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml" }
-  ),
-  range_args = util.extend_args(
-    stylua.range_args,
-    { "--config-path", vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml" }
-  ),
-})
+--   https://github.com/stevearc/conform.nvim#customizing-formatters
+conform.formatters.stylua = {
+  prepend_args = { "--config-path", vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/stylua.toml" },
+}
 
-local clang_format = require("conform.formatters.clang_format")
-conform.formatters.clang_format = vim.tbl_deep_extend("force", clang_format, {
-  args = util.extend_args(
-    clang_format.args,
-    { "-style", "file:" .. vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml" }
-  ),
-  range_args = util.extend_args(
-    clang_format.range_args,
-    { "-style", "file:" .. vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml" }
-  ),
-})
+conform.formatters.clang_format = {
+  prepend_args = {
+    "-style",
+    "file:" .. vim.fn.stdpath("config") .. "/lua/user/config/formatter/options/clang-format.yml",
+  },
+}
 
 -- :Format command
 vim.api.nvim_create_user_command("Format", function(args)
