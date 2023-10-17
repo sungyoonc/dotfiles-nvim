@@ -120,8 +120,8 @@ local function enable_codelens(bufnr)
 end
 
 local function enable_debugger(bufnr, test_enabled)
-  jdtls.setup_dap({ hotcodereplace = "auto" })
-  jdtls.dap.setup_dap_main_class_configs()
+  require("jdtls").setup_dap({ hotcodereplace = "auto" })
+  require("jdtls.dap").setup_dap_main_class_configs()
 
   if test_enabled then
     local opts = { buffer = bufnr }
