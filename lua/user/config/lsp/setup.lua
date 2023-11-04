@@ -3,9 +3,8 @@ local servers = {
   "jsonls", -- json
   "bashls", -- bash
   "clangd", -- c language
-  "pyright", -- python
-  "jedi_language_server", -- python
-  "ansiblels" -- ansible
+  "pylsp", -- python
+  "ansiblels", -- ansible
 }
 local custom_servers = {
   "rust_analyzer", -- rust
