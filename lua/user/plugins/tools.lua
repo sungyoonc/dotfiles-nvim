@@ -43,6 +43,9 @@ local M = {
       require("user.config.treesitter")
     end,
   },
+  {
+    "luckasRanarison/tree-sitter-hypr",
+  },
 
   { -- TODO: get configuration from github
     "folke/trouble.nvim",

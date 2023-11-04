@@ -1,6 +1,16 @@
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+parser_config.hypr = {
+  install_info = {
+    url = "https://github.com/luckasRanarison/tree-sitter-hypr",
+    files = { "src/parser.c" },
+    branch = "master",
+  },
+  filetype = "hypr",
+}
+
 require("nvim-treesitter.configs").setup({
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
-  ensure_installed = { "vimdoc", "lua", "c", "java", "python", "rust", "toml" },
+  ensure_installed = { "vimdoc", "lua", "c", "java", "python", "rust", "toml", "hypr" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
