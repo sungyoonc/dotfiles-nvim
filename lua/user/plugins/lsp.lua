@@ -28,12 +28,13 @@ local M = {
   },
 
   -- Language Specific
-  -- {
-  --   "simrat39/rust-tools.nvim",
-  --   config = function()
-  --     require "user.config.rust-tools"
-  --   end,
-  -- }, -- better rust lsp intergration
+  {
+    "simrat39/rust-tools.nvim",
+    ft = "rust",
+    config = function()
+      require("user.config.rust-tools")
+    end,
+  }, -- better rust lsp intergration
   {
     "pearofducks/ansible-vim",
     ft = { "yaml" },

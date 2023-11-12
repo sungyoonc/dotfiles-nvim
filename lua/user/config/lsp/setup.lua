@@ -6,7 +6,9 @@ local servers = {
   "pylsp", -- python
   "ansiblels", -- ansible
 }
-local custom_servers = {
+local custom_servers = {}
+local custom_servers_without_setup = {
+  -- handled by rust-tools
   "rust_analyzer", -- rust
 }
 
@@ -16,7 +18,7 @@ if not mason_lspconfig_status_ok or mason_lspconfig == "require error" then
 end
 mason_lspconfig.setup({
   ensure_installed = servers,
-  automatic_installation = { exclude = custom_servers },
+  automatic_installation = { exclude = vim.list_extend(custom_servers_without_setup, custom_servers) },
 })
 
 local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
