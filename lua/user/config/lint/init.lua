@@ -1,9 +1,9 @@
 local lint = require("lint")
 
 lint.linters_by_ft = {
-  python = {
-    "ruff",
-  },
+  -- python = {
+  --   "ruff",
+  -- },
   cpp = {
     "cpplint",
   },

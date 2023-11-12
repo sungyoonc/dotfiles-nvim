@@ -10,8 +10,7 @@ local formatters = {
   -- lua
   "stylua",
   -- python
-  "black",
-  "isort",
+  "ruff",
   -- rust
   --   should be installed via rustup
   --   https://github.com/rust-lang/rustfmt#quick-start
@@ -22,13 +21,12 @@ local formatters = {
 }
 local linters = {
   -- python
-  "ruff",
+  -- "ruff", (managed by pylsp)
   -- c, cpp
   "cpplint",
   -- ansible
-  "ansible-lint"
+  "ansible-lint",
 }
-
 
 local tool_list = {}
 vim.list_extend(tool_list, debuggers)

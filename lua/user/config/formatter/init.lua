@@ -8,7 +8,7 @@ conform.setup({
     rust = { "rustfmt" },
     c = { "clang_format" },
     java = { "clang_format" },
-    python = { "isort", "black" }, -- run sequentially
+    python = { "ruff_format" }, -- run sequentially
     sh = { "shfmt" },
     zsh = { "shfmt" },
   },
