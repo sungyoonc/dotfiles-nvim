@@ -11,13 +11,16 @@ local custom_servers_without_setup = {
   -- handled by rust-tools
   "rust_analyzer", -- rust
 }
+local custom_servers_auto_install = {
+  "jdtls" -- java
+}
 
 local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not mason_lspconfig_status_ok or mason_lspconfig == "require error" then
   return "require error" -- Prevent require loop
 end
 mason_lspconfig.setup({
-  ensure_installed = servers,
+  ensure_installed = vim.list_extend(custom_servers_auto_install, servers),
   automatic_installation = { exclude = vim.list_extend(custom_servers_without_setup, custom_servers) },
 })
 
