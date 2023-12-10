@@ -21,8 +21,15 @@ cpplint.args = {
 }
 
 -- autocmd
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
+  end,
+})
+vim.api.nvim_create_autocmd({ "TextChanged" }, {
+  callback = function()
+    if vim.fn.mode() == "n" then
+      require("lint").try_lint()
+    end
   end,
 })
