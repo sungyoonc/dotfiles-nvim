@@ -3,7 +3,8 @@ local servers = {
   "jsonls", -- json
   "bashls", -- bash
   "clangd", -- c language
-  "pylsp", -- python
+  "pyright", -- python
+  "jedi_language_server", -- python
   "ansiblels", -- ansible
 }
 local custom_servers = {}
@@ -12,7 +13,7 @@ local custom_servers_without_setup = {
   "rust_analyzer", -- rust
 }
 local custom_servers_auto_install = {
-  "jdtls" -- java
+  "jdtls", -- java
 }
 
 local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
