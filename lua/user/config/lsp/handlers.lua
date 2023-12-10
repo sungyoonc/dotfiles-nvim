@@ -90,7 +90,7 @@ M.on_attach = function(client, bufnr)
 
   -- Enable inlay hints
   if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint(bufnr, true)
+    vim.lsp.inlay_hint.enable(bufnr, true)
   end
 end
 -- https://github.com/neovim/nvim-lspconfig#suggested-configuration
