@@ -9,8 +9,6 @@ local debuggers = {
 local formatters = {
   -- lua
   "stylua",
-  -- python
-  "ruff",
   -- rust
   --   should be installed via rustup
   --   https://github.com/rust-lang/rustfmt#quick-start

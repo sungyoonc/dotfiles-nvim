@@ -5,6 +5,7 @@ local servers = {
   "clangd", -- c language
   "pyright", -- python
   "jedi_language_server", -- python
+  "ruff_lsp", -- python
   "ansiblels", -- ansible
 }
 local custom_servers = {}
