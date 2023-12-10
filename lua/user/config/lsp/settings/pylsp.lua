@@ -70,6 +70,9 @@ return {
             "--cache-dir",
             mypy_cache_dir(),
 
+            "--python-executable",
+            "python",
+
             true,
           },
         },
