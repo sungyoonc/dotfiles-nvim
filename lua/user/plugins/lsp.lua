@@ -32,7 +32,7 @@ local M = {
     "simrat39/rust-tools.nvim",
     ft = "rust",
     config = function()
-      require("user.config.rust-tools")
+      require("user.config.lsp.rust-tools")
     end,
   }, -- better rust lsp intergration
   {
