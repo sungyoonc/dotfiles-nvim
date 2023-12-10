@@ -30,9 +30,6 @@ if not lspconfig_status_ok then
   return
 end
 
--- Install pylsp plugins when mason package is installed/updated
-require("mason-registry"):on("package:install:success", require("user.config.lsp.util").mason_post_install)
-
 local function setup_server(lsp, server)
   local opts = {
     on_attach = require("user.config.lsp.handlers").on_attach,
