@@ -6,7 +6,7 @@ M.mason_post_install = function(pkg)
   -- https://github.com/python-lsp/python-lsp-server#3rd-party-plugins
   local plugin_list = {
     "python-lsp-ruff",
-    "pyls-memestra",
+    -- "pyls-memestra",
     "pylsp-mypy",
   }
 
