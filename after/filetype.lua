@@ -3,7 +3,7 @@
 
 vim.filetype.add({
   pattern = {
-    [".*/hypr/.*%.conf"] = "hypr",
+    [".*/hypr/.*%.conf"] = "hyprlang",
   },
   filename = {
     ["leetcode.nvim"] = "leetcode.nvim",

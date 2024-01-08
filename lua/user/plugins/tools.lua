@@ -44,7 +44,8 @@ local M = {
     end,
   },
   {
-    "luckasRanarison/tree-sitter-hypr",
+    "luckasRanarison/tree-sitter-hyprlang",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 
   { -- TODO: get configuration from github
