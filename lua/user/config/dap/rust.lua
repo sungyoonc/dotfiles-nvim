@@ -31,6 +31,10 @@ dap.configurations.rust = {
     program = function()
       return run_build(build_type.BIN)
     end,
+    arg = function()
+      local args = vim.fn.input("Arguments: ")
+      return vim.split(args, " ", { trimempty = true })
+    end,
     cwd = "${workspaceFolder}",
     stopOnEntry = false,
     showDisassembly = "never",
