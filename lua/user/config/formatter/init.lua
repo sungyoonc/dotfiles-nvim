@@ -5,7 +5,6 @@ conform.setup({
   formatters_by_ft = {
     -- Supported: https://github.com/stevearc/conform.nvim#formatters
     lua = { "stylua" },
-    rust = { "rustfmt" },
     c = { "clang_format" },
     java = { "clang_format" },
     python = { "ruff_format" }, -- run sequentially
