@@ -1,8 +1,9 @@
-local M = {
+return {
+  -- copilot (lua version)
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    -- event = { "InsertEnter" },
+    build = ":Copilot auth",
     opts = {
       panel = {
         enabled = false,
@@ -48,5 +49,3 @@ local M = {
     },
   },
 }
-
-return M

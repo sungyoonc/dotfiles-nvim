@@ -1,4 +1,5 @@
 return {
+  -- leetcode
   "kawre/leetcode.nvim",
   ft = { "leetcode.nvim" },
   build = ":TSUpdate html",

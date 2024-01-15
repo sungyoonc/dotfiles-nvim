@@ -1,11 +1,9 @@
--- Linter Plugins
-local M = {
+return {
   {
     "mfussenegger/nvim-lint",
-    event = "BufWritePre",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     config = function()
       require("user.config.lint")
     end,
   },
 }
-return M

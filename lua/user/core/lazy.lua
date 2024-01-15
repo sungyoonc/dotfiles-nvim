@@ -15,10 +15,17 @@ vim.opt.runtimepath:prepend(lazypath)
 -- Configurations
 -- https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 local lazyconfig = {
+  spec = {
+    { import = "user.plugins" },
+    { import = "user.plugins.extras.coding" },
+    { import = "user.plugins.extras.lang" },
+    { import = "user.plugins.extras.lsp" },
+    { import = "user.plugins.extras.treesitter" },
+  },
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?
   },
 }
 
 -- Setup lazy
-require("lazy").setup("user.plugins", lazyconfig)
+require("lazy").setup(lazyconfig)

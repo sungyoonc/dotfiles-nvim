@@ -1,15 +1,16 @@
 return {
   "stevearc/conform.nvim",
+  dependencies = { "mason.nvim" },
+  lazy = true,
   event = { "BufWritePre" },
   cmd = { "ConformInfo", "Format" },
   keys = {
     {
-      -- Customize or remove this keymap to your liking
       "<leader>lf",
       function()
         require("conform").format({ async = true, lsp_fallback = true })
       end,
-      mode = "",
+      mode = { "n", "v" },
       desc = "Format buffer",
     },
   },

@@ -1,18 +1,21 @@
--- Language Server Plugins
-local M = {
-  -- Language Server
+return {
+  -- lspconfig
   {
-    "neovim/nvim-lspconfig", -- enable LSP
+    "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim", -- simple to use language server installer
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp", -- lsp completions
     },
     config = function()
       require("user.config.lsp")
     end,
   },
+
+  -- lsp servers
   {
     "williamboman/mason.nvim", -- simple to use language server installer
+    build = ":MasonUpdate",
     opts = {
       ui = {
         border = "none",
@@ -27,25 +30,13 @@ local M = {
     },
   },
 
-  -- Language Specific
+  -- dap, linter, formatters
   {
-    "simrat39/rust-tools.nvim",
-    ft = "rust",
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    dependencies = { "williamboman/mason.nvim" },
     config = function()
-      require("user.config.lsp.rust-tools")
-    end,
-  }, -- better rust lsp intergration
-  {
-    "pearofducks/ansible-vim",
-    ft = { "yaml" },
-  },
-  {
-    "mfussenegger/nvim-jdtls",
-    ft = { "java" },
-    config = function()
-      require("user.config.lsp.jdtls")
+      require("user.config.mason_tool_installer")
     end,
   },
 }
-
-return M
