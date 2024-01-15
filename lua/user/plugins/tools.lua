@@ -27,7 +27,7 @@ local M = {
 
   -- Preview colors
   {
-    "brenoprata10/nvim-highlight-colors",
+    "NvChad/nvim-colorizer.lua",
     event = "VeryLazy",
     opts = {},
   },
