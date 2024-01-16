@@ -3,8 +3,8 @@ local options = {
   relativenumber = true, -- set relative numbered lines
   numberwidth = 4, -- minimal number of columns to use for the line number
 
-  tabstop = 4, -- insert 2 spaces for a tab
-  softtabstop = 4, -- the number of columns of whitespace a tab keypress or a backspace keypress is worth
+  tabstop = 8, -- insert 2 spaces for a tab
+  softtabstop = 0, -- the number of columns of whitespace a tab keypress or a backspace keypress is worth
   shiftwidth = 4, -- the number of spaces inserted for each indentation
   expandtab = true, -- convert tabs to spaces
 
