@@ -13,7 +13,7 @@ return {
       "Telescope",
     },
     config = function()
-      require("user.config.telescope")
+      require("config.telescope")
     end,
   },
 

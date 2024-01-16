@@ -8,7 +8,7 @@ return {
       "hrsh7th/cmp-nvim-lsp", -- lsp completions
     },
     config = function()
-      require("user.config.lsp")
+      require("config.lsp")
     end,
   },
 
@@ -36,7 +36,7 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = { "williamboman/mason.nvim" },
     config = function()
-      require("user.config.mason_tool_installer")
+      require("config.mason_tool_installer")
     end,
   },
 }

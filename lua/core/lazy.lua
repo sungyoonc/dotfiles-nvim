@@ -16,11 +16,11 @@ vim.opt.runtimepath:prepend(lazypath)
 -- https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 local lazyconfig = {
   spec = {
-    { import = "user.plugins" },
-    { import = "user.plugins.extras.coding" },
-    { import = "user.plugins.extras.lang" },
-    { import = "user.plugins.extras.lsp" },
-    { import = "user.plugins.extras.treesitter" },
+    { import = "plugins" },
+    { import = "plugins.extras.coding" },
+    { import = "plugins.extras.lang" },
+    { import = "plugins.extras.lsp" },
+    { import = "plugins.extras.treesitter" },
   },
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?

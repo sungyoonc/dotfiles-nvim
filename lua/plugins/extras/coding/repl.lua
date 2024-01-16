@@ -4,7 +4,7 @@ return {
     "Vigemus/iron.nvim",
     ft = { "python" },
     config = function()
-      require("user.config.iron")
+      require("config.iron")
     end,
   },
 }

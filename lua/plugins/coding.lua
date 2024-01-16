@@ -11,7 +11,7 @@ return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     config = function()
-      require("user.config.cmp")
+      require("config.cmp")
     end,
     dependencies = {
       { "hrsh7th/cmp-nvim-lua", ft = "lua" }, -- neovim lua api completions

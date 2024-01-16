@@ -83,7 +83,7 @@ end
 
 M.on_attach = function(client, bufnr)
   -- Load server-specific language server capabilities settings
-  local conf_ok, conf_capa = pcall(require, "user.config.lsp.server_settings." .. client.name)
+  local conf_ok, conf_capa = pcall(require, "config.lsp.server_settings." .. client.name)
   if conf_ok then
     client.server_capabilities = vim.tbl_extend("force", client.server_capabilities, conf_capa)
   end

@@ -38,6 +38,6 @@ dap.listeners.before.event_exited["dapui_config"] = function()
   dapui.close()
 end
 
-require("user.config.dap.cpp")
-require("user.config.dap.rust")
-require("user.config.dap.python")
+require("config.dap.cpp")
+require("config.dap.rust")
+require("config.dap.python")

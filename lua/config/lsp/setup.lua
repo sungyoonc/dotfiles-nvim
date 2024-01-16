@@ -33,13 +33,13 @@ end
 
 local function setup_server(lsp, server)
   local opts = {
-    on_attach = require("user.config.lsp.handlers").on_attach,
-    capabilities = require("user.config.lsp.handlers").capabilities,
+    on_attach = require("config.lsp.handlers").on_attach,
+    capabilities = require("config.lsp.handlers").capabilities,
   }
 
   server = vim.split(server, "@")[1]
 
-  local require_ok, conf_opts = pcall(require, "user.config.lsp.settings." .. server) -- Load server-specific settings
+  local require_ok, conf_opts = pcall(require, "config.lsp.settings." .. server) -- Load server-specific settings
   if require_ok then
     opts = vim.tbl_deep_extend("force", conf_opts, opts) -- opts will override conf_opts
   end

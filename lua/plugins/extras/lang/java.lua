@@ -4,7 +4,7 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = { "java" },
     config = function()
-      require("user.config.lsp.jdtls")
+      require("config.lsp.jdtls")
     end,
   },
 }

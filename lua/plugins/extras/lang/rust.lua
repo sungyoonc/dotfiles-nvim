@@ -4,7 +4,7 @@ return {
     "simrat39/rust-tools.nvim",
     ft = { "rust" },
     config = function()
-      require("user.config.lsp.rust-tools")
+      require("config.lsp.rust-tools")
     end,
   },
 }

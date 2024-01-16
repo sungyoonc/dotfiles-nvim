@@ -8,7 +8,7 @@ return {
     end,
     event = { "BufReadPost", "BufNewFile", "BufWritePre", "VeryLazy" },
     config = function()
-      require("user.config.treesitter")
+      require("config.treesitter")
     end,
   },
 }
