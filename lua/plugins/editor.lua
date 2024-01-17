@@ -37,6 +37,14 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-media-files.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        enabled = vim.fn.executable("make") == 1, -- if make is available
+        config = function()
+          require("telescope").load_extension("fzf")
+        end,
+      },
     },
     keys = {
       { "<leader>f", desc = "Telescope" },
