@@ -98,4 +98,24 @@ return {
       { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
     },
   },
+
+  -- terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    cmd = {
+      "ToggleTerm",
+      "ToggleTermToggleAll",
+      "TermExec",
+      "TermSelect",
+      "ToggleTermSendCurrentLine",
+      "ToggleTermSendVisualLines",
+      "ToggleTermSendVisualSelection",
+      "ToggleTermSetName",
+    },
+    keys = { "<leader>g" },
+    config = function()
+      require("config.toggleterm")
+    end,
+  },
 }
