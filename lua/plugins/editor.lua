@@ -118,4 +118,10 @@ return {
       require("config.toggleterm")
     end,
   },
+
+  -- nice notification ui
+  {
+    "j-hui/fidget.nvim",
+    opts = {},
+  },
 }
