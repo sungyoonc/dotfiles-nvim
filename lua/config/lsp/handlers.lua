@@ -106,6 +106,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     lsp_keymaps(bufnr)
     lsp_highlight_document(client)
+
+    -- use telescope lsp pickers
+    local status_ok, builtin = pcall(require, "telescope.builtin")
+    if status_ok then
+      vim.lsp.handlers["textDocument/references"] = builtin.lsp_references
+      vim.lsp.handlers["textDocument/definition"] = builtin.lsp_definitions
+    end
   end,
 })
 
