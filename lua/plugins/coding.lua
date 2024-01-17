@@ -24,7 +24,18 @@ return {
   {
     "echasnovski/mini.pairs",
     event = "InsertEnter",
-    opts = {},
+    opts = {
+      mappings = {
+        -- disable annoying auto pair deleting
+        ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\].", register = { bs = false } },
+        ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\].", register = { bs = false } },
+        ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\].", register = { bs = false } },
+
+        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\].", register = { bs = false } },
+        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\].", register = { bs = false } },
+        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\].", register = { bs = false } },
+      },
+    },
   },
 
   -- comments
