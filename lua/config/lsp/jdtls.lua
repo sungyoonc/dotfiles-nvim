@@ -139,16 +139,7 @@ local function jdtls_on_attach(client, bufnr)
     enable_codelens(bufnr)
   end
 
-  vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-    callback = function()
-      vim.lsp.inlay_hint.enable(0, true)
-    end,
-  })
-  vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-    callback = function()
-      vim.lsp.inlay_hint.enable(0, false)
-    end,
-  })
+  vim.lsp.inlay_hint.enable(0, true)
 
   -- The following mappings are based on the suggested usage of nvim-jdtls
   -- https://github.com/mfussenegger/nvim-jdtls#usage
