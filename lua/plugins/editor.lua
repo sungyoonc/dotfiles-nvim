@@ -46,12 +46,7 @@ return {
         end,
       },
     },
-    keys = {
-      { "<leader>f", desc = "Telescope" },
-    },
-    cmd = {
-      "Telescope",
-    },
+    event = "VeryLazy",
     config = function()
       require("config.telescope")
     end,
@@ -65,6 +60,9 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 300
     end,
+    config = function()
+      require("config.which-key")
+    end,
     opts = {},
   },
 
@@ -72,6 +70,7 @@ return {
   -- TODO: get configuration from github
   {
     "folke/trouble.nvim",
+    lazy = true,
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = {
       "Trouble",
@@ -93,10 +92,11 @@ return {
   {
     "jiaoshijie/undotree",
     dependencies = "nvim-lua/plenary.nvim",
-    config = true,
-    keys = {
-      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
-    },
+    config = function()
+      require("undotree").setup()
+      vim.keymap.set("n", "<leader>u", require("undotree").toggle, { desc = "Toggle Undotree" })
+    end,
+    keys = { { "<leader>u", desc = "Toggle Undotree" } },
   },
 
   -- terminal
@@ -113,7 +113,7 @@ return {
       "ToggleTermSendVisualSelection",
       "ToggleTermSetName",
     },
-    keys = { "<leader>g" },
+    keys = { { "<leader>g", desc = "Toggle Lazygit" } },
     config = function()
       require("config.toggleterm")
     end,

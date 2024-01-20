@@ -104,8 +104,15 @@ telescope.setup({
 })
 
 -- Telescope keymaps --
-local keymap = vim.api.nvim_set_keymap
-local opts = { noremap = true, silent = true }
-keymap("n", "<leader>f", "<cmd>Telescope find_files<cr>", opts)
--- keymap("n", "<leader>f", "<cmd>lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ previewer = false }))<cr>", opts)
-keymap("n", "<c-t>", "<cmd>Telescope live_grep<cr>", opts)
+local keymap = vim.keymap.set
+
+---@param desc string
+local function opts(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
+
+local builtin = require("telescope.builtin")
+keymap("n", "<C-p>", builtin.git_files, opts("Find Git Files"))
+keymap("n", "<leader>pf", builtin.find_files, opts("Find Files"))
+keymap("n", "<leader>ps", builtin.live_grep, opts("Live Grep"))
+keymap("n", "<leader>ph", builtin.help_tags, opts("View Help Tags"))

@@ -63,22 +63,33 @@ local function lsp_highlight_document(client)
   end
 end
 
-local function lsp_keymaps(bufnr)
-  local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>f", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[d", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  -- vim.cmd [[ command! Format execute "lua vim.lsp.buf.format()" ]]
+function M.lsp_keymaps(bufnr)
+  ---@param desc string
+  local function opts(desc)
+    return { noremap = true, silent = true, buffer = bufnr, desc = desc }
+  end
+  local keymap = vim.keymap.set
+  keymap("n", "gd", vim.cmd.LspInfo, opts("Lsp Info"))
+  keymap("n", "gd", vim.lsp.buf.definition, opts("Goto Defenition"))
+  keymap("n", "gr", vim.lsp.buf.references, opts("References"))
+  keymap("n", "gD", vim.lsp.buf.declaration, opts("Goto Declaration"))
+  keymap("n", "gI", vim.lsp.buf.implementation, opts("Goto Implementation"))
+  keymap("n", "gy", vim.lsp.buf.type_definition, opts("Goto T[y]pe Definition"))
+  keymap("n", "K", vim.lsp.buf.hover, opts("Hover"))
+  keymap("n", "gK", vim.lsp.buf.signature_help, opts("Signature Help"))
+  keymap("i", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Help"))
+  keymap({ "n", "v" }, "<leader>lca", vim.lsp.buf.code_action, opts("Code Action"))
+  keymap("n", "<leader>lcA", function()
+    vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostic = {} } })
+  end, opts("Source Action"))
+  keymap("n", "<leader>lrn", vim.lsp.buf.rename, opts("Rename"))
+  keymap("n","<leader>li", function ()
+    if vim.lsp.inlay_hint.is_enabled(0) then
+      vim.lsp.inlay_hint.enable(0, false)
+    else
+      vim.lsp.inlay_hint.enable(0, true)
+    end
+  end, opts("Toggle Inlay Hint"))
 end
 
 M.on_attach = function(client, bufnr)
@@ -104,7 +115,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       return
     end
 
-    lsp_keymaps(bufnr)
+    M.lsp_keymaps(bufnr)
     lsp_highlight_document(client)
 
     -- use telescope lsp pickers

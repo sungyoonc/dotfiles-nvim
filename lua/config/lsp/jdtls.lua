@@ -124,9 +124,9 @@ local function enable_debugger(bufnr, test_enabled)
   require("jdtls.dap").setup_dap_main_class_configs()
 
   if test_enabled then
-    local opts = { buffer = bufnr }
-    vim.keymap.set("n", "<leader>df", "<cmd>lua require('jdtls').test_class()<cr>", opts)
-    vim.keymap.set("n", "<leader>dn", "<cmd>lua require('jdtls').test_nearest_method()<cr>", opts)
+    local keymap = vim.keymap.set
+    keymap("n", "<leader>ltc", jdtls.test_class, { desc = "Java Test Class", buffer = bufnr })
+    keymap("n", "<leader>ltn", jdtls.test_nearest_method, { desc = "Java Test Nearest Method", buffer = bufnr })
   end
 end
 
@@ -139,18 +139,23 @@ local function jdtls_on_attach(client, bufnr)
     enable_codelens(bufnr)
   end
 
-  vim.lsp.inlay_hint.enable(0, true)
+  vim.lsp.inlay_hint.enable(0, true) -- using bufnr as argument does not work for some reason
 
   -- The following mappings are based on the suggested usage of nvim-jdtls
   -- https://github.com/mfussenegger/nvim-jdtls#usage
 
-  local opts = { buffer = bufnr }
-  vim.keymap.set("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts)
-  vim.keymap.set("n", "crv", "<cmd>lua require('jdtls').extract_variable()<cr>", opts)
-  vim.keymap.set("x", "crv", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts)
-  vim.keymap.set("n", "crc", "<cmd>lua require('jdtls').extract_constant()<cr>", opts)
-  vim.keymap.set("x", "crc", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts)
-  vim.keymap.set("x", "crm", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts)
+  ---@param desc string
+  local function opts(desc)
+    return { desc = desc, buffer = bufnr }
+  end
+
+  local keymap = vim.keymap.set
+  keymap("n", "<A-o>", "<cmd>lua require('jdtls').organize_imports()<cr>", opts("Organize Imports"))
+  keymap("n", "<leader>lev", "<cmd>lua require('jdtls').extract_variable()<cr>", opts("Extract Variable"))
+  keymap("x", "<leader>lev", "<esc><cmd>lua require('jdtls').extract_variable(true)<cr>", opts("Extract Variable"))
+  keymap("n", "<leader>lec", "<cmd>lua require('jdtls').extract_constant()<cr>", opts("Extract Constant"))
+  keymap("x", "<leader>lec", "<esc><cmd>lua require('jdtls').extract_constant(true)<cr>", opts("Extract Constant"))
+  keymap("x", "<leader>lem", "<esc><Cmd>lua require('jdtls').extract_method(true)<cr>", opts("Extract Method"))
 end
 
 -- See `:help vim.lsp.start_client` for an overview of the supported `config` options.
