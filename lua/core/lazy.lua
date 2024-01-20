@@ -25,6 +25,9 @@ local lazyconfig = {
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?
   },
+  change_detection = {
+    notify = false,
+  },
 }
 
 -- Setup lazy
