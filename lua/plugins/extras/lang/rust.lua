@@ -1,10 +1,11 @@
 return {
   -- rust-tools
   {
-    "simrat39/rust-tools.nvim",
+    "mrcjkb/rustaceanvim",
+    version = "^3",
     ft = { "rust" },
-    config = function()
-      require("config.lsp.rust-tools")
+    init = function()
+      require("config.lsp.rustacean")
     end,
   },
 }
