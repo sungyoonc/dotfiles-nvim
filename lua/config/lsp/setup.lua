@@ -6,6 +6,7 @@ local servers = {
   "pyright", -- python
   "jedi_language_server", -- python
   "ruff_lsp", -- python
+  "gopls", -- go
   "ansiblels", -- ansible
 }
 local custom_servers = {}
