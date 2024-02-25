@@ -12,5 +12,10 @@ vim.g.rustaceanvim = {
         vim.lsp.inlay_hint.enable(bufnr, true)
       end
     end,
+    default_settings = {
+      ["rust-analyzer"] = {
+        check = { command = "clippy" },
+      },
+    },
   },
 }
