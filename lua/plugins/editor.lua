@@ -124,4 +124,11 @@ return {
     "j-hui/fidget.nvim",
     opts = {},
   },
+  {
+    "alohaia/fcitx.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("fcitx")({})
+    end,
+  },
 }
