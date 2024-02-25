@@ -30,6 +30,10 @@ conform.formatters.clang_format = {
   },
 }
 
+conform.formatters.shfmt = {
+  prepend_args = { "-i=4" },
+}
+
 -- :Format command
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
