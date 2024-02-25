@@ -122,7 +122,13 @@ return {
   -- nice notification ui
   {
     "j-hui/fidget.nvim",
-    opts = {},
+    opts = {
+      progress = {
+        lsp = {
+          progress_ringbuf_size = 1024,
+        },
+      },
+    },
   },
   {
     "alohaia/fcitx.nvim",
