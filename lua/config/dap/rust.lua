@@ -1,5 +1,20 @@
 local dap = require("dap")
 
+if dap.adapters.codelldb == nil then
+  dap.adapters.codelldb = {
+    type = "server",
+    port = "${port}",
+    executable = {
+      command = "codelldb",
+      args = { "--port", "${port}" },
+    },
+  }
+
+  if vim.fn.has("win32") == 1 then
+    dap.adapters.codelldb.executable.detached = false
+  end
+end
+
 local build_type = {
   TEST = "cargo build --tests -q --message-format=json",
   BIN = "cargo build -q --message-format=json",
@@ -16,12 +31,6 @@ local function run_build(type)
 
   return filename
 end
-
-dap.adapters.rust_gdb = {
-  type = "executable",
-  command = "rust-gdb",
-  name = "gdb",
-}
 
 dap.configurations.rust = {
   {
@@ -41,7 +50,7 @@ dap.configurations.rust = {
   },
   {
     name = "Debug Test",
-    type = "rust_gdb",
+    type = "codelldb",
     request = "launch",
     program = function()
       return run_build(build_type.TEST)
@@ -52,7 +61,7 @@ dap.configurations.rust = {
   },
   {
     name = "Launch file",
-    type = "rust_gdb",
+    type = "codelldb",
     request = "launch",
     program = function()
       return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")

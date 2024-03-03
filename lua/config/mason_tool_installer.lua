@@ -1,5 +1,5 @@
 local debuggers = {
-  -- c, c++
+  -- c, c++, rust
   "codelldb",
   -- python
   "debugpy",
