@@ -108,17 +108,25 @@ cmp.setup({
         luasnip = "[Snippet]",
         buffer = "[Buffer]",
         path = "[Path]",
+
+        -- Language Specific sources
+        -- R
+        cmp_r = "[R]",
       })[entry.source.name]
       return vim_item
     end,
   },
-  sources = {
+  sources = cmp.config.sources({
     { name = "nvim_lsp" },
     { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
     { name = "path" },
-  },
+
+    -- Language Specific sources
+    -- R
+    { name = "cmp_r" },
+  }),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,

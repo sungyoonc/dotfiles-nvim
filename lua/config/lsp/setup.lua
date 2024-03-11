@@ -7,6 +7,7 @@ local servers = {
   "jedi_language_server", -- python
   "ruff_lsp", -- python
   "gopls", -- go
+  "r_language_server",
   "ansiblels", -- ansible
   "marksman", -- markdown
 }
