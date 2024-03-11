@@ -6,6 +6,7 @@ conform.setup({
     -- Supported: https://github.com/stevearc/conform.nvim#formatters
     lua = { "stylua" },
     c = { "clang_format" },
+    cpp = { "clang_format" },
     java = { "clang_format" },
     python = { "ruff_format" }, -- run sequentially
     sh = { "shfmt" },
