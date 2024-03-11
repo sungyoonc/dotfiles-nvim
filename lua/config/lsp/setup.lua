@@ -8,6 +8,7 @@ local servers = {
   "ruff_lsp", -- python
   "gopls", -- go
   "ansiblels", -- ansible
+  "marksman", -- markdown
 }
 local custom_servers = {}
 local custom_servers_without_setup = {
