@@ -118,7 +118,24 @@ return {
       require("config.toggleterm")
     end,
   },
-
+  {
+    "folke/zen-mode.nvim",
+    keys = {
+      { "<c-w>z", desc = "Toggle Zoom" },
+      { "<leader>zz", desc = "Toggle Zen Mode" },
+      { "<leader>zZ", desc = "Toggle Deep Zen Mode" },
+    },
+    init = function()
+      require("which-key").register({
+        ["<leader>"] = {
+          z = { name = "+zen" },
+        },
+      })
+    end,
+    config = function()
+      require("config.zen-mode")
+    end,
+  },
   -- nice notification ui
   {
     "j-hui/fidget.nvim",
