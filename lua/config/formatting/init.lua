@@ -21,13 +21,13 @@ conform.setup({
 -- Add args to existing formatters
 --   https://github.com/stevearc/conform.nvim#customizing-formatters
 conform.formatters.stylua = {
-  prepend_args = { "--config-path", vim.fn.stdpath("config") .. "/lua/config/formatter/options/stylua.toml" },
+  prepend_args = { "--config-path", vim.fn.stdpath("config") .. "/lua/config/formatting/options/stylua.toml" },
 }
 
 conform.formatters.clang_format = {
   prepend_args = {
     "-style",
-    "file:" .. vim.fn.stdpath("config") .. "/lua/config/formatter/options/clang-format.yml",
+    "file:" .. vim.fn.stdpath("config") .. "/lua/config/formatting/options/clang-format.yml",
   },
 }
 

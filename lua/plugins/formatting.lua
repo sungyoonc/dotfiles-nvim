@@ -15,7 +15,7 @@ return {
     },
   },
   config = function()
-    require("config.formatter")
+    require("config.formatting")
   end,
   init = function()
     -- If you want the formatexpr, here is the place to set it
