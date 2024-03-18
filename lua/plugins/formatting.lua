@@ -5,14 +5,7 @@ return {
   event = { "BufWritePre" },
   cmd = { "ConformInfo", "Format" },
   keys = {
-    {
-      "<leader>lf",
-      function()
-        require("conform").format({ async = true, lsp_fallback = true })
-      end,
-      mode = { "n", "v" },
-      desc = "Format buffer",
-    },
+    { "<leader>lf", mode = { "n", "v" }, desc = "Format buffer" },
   },
   config = function()
     require("config.formatting")
