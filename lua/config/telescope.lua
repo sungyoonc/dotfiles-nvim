@@ -109,6 +109,7 @@ local function opts(desc)
 end
 
 local builtin = require("telescope.builtin")
+local utils = require("telescope.utils")
 keymap("n", "<C-p>", function()
   local result, _ = pcall(builtin.git_files)
   if not result then
@@ -117,6 +118,18 @@ keymap("n", "<C-p>", function()
   end
 end, opts("Find Git Files"))
 
-keymap("n", "<leader>pf", builtin.find_files, opts("Find Files"))
+keymap("n", "<leader>pf", builtin.find_files, opts("Find Files (cwd)"))
+keymap("n", "<leader>pF", function()
+  builtin.find_files({
+    cwd = utils.buffer_dir(),
+  })
+end, opts("Find Files (directory of current file)"))
+
 keymap("n", "<leader>ps", builtin.live_grep, opts("Live Grep"))
+keymap("n", "<leader>pS", function ()
+  builtin.grep_string({
+    search = vim.fn.input("Grep> ")
+  })
+end, opts("Grep Search"))
+
 keymap("n", "<leader>ph", builtin.help_tags, opts("View Help Tags"))
