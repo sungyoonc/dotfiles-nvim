@@ -9,11 +9,11 @@ dap.adapters.codelldb = {
   },
 }
 
-if vim.fn.has('win32') == 1 then
-	dap.adapters.codelldb.executable.detached = false
+if vim.fn.has("win32") == 1 then
+  dap.adapters.codelldb.executable.detached = false
 end
 
-local codelldb_conf = {
+local codelldb_launch = {
   name = "Launch file",
   type = "codelldb",
   request = "launch",
@@ -24,5 +24,13 @@ local codelldb_conf = {
   stopOnEntry = false,
 }
 
-dap.configurations.cpp = { codelldb_conf }
+local codelldb_attach = {
+  name = "Attach",
+  type = "codelldb",
+  request = "attach",
+  pid = require("dap.utils").pick_process,
+  args = {},
+}
+
+dap.configurations.cpp = { codelldb_launch, codelldb_attach }
 dap.configurations.c = dap.configurations.cpp
