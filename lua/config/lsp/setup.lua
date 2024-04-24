@@ -9,7 +9,7 @@ local servers = {
   "gopls", -- go
   "r_language_server",
   "ansiblels", -- ansible
-  "marksman", -- markdown
+  "markdown_oxide", -- markdown
 }
 local custom_servers = {}
 local custom_servers_without_setup = {

@@ -59,3 +59,21 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+vim.api.nvim_create_autocmd({ "LspAttach" }, {
+  group = augroup("markdown_oxide"),
+  callback = function(event)
+    local bufnr = event.buf
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.name == "markdown_oxide" then
+      -- refresh codelens on TextChanged and InsertLeave as well
+      vim.api.nvim_create_autocmd({ "TextChanged", "InsertLeave", "CursorHold", "LspAttach" }, {
+        buffer = bufnr,
+        callback = vim.lsp.codelens.refresh,
+      })
+
+      -- trigger codelens refresh
+      vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
+    end
+  end,
+})

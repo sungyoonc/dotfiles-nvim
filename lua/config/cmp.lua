@@ -117,7 +117,14 @@ cmp.setup({
     end,
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
+    {
+      name = "nvim_lsp",
+      option = {
+        markdown_oxide = {
+          keyword_pattern = [[\(\k\| \|\/\|#\)\+]],
+        },
+      },
+    },
     { name = "nvim_lua" },
     { name = "luasnip" },
     { name = "buffer" },
