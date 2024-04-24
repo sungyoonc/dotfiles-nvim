@@ -3,7 +3,7 @@ harpoon:setup()
 
 local keymap = vim.keymap.set
 keymap("n", "<leader>a", function()
-  harpoon:list():append()
+  harpoon:list():add()
 end, { desc = "Append to Harpoon" })
 keymap("n", "<C-s>", function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
