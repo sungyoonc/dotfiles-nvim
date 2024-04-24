@@ -140,3 +140,9 @@ keymap("n", "<leader>pS", function()
 end, opts("Grep String"))
 
 keymap("n", "<leader>ph", builtin.help_tags, opts("View Help Tags"))
+
+keymap("n", "<leader>pg", builtin.git_status, opts("Git Status"))
+keymap("n", "<leader>pG", builtin.spell_suggest, opts("Spell Grammar Suggest"))
+
+keymap("n", "<leader>pt", builtin.treesitter, opts("Treesitter Finder"))
+keymap("n", "<leader>pb", builtin.buffers, opts("List of buffers"))
