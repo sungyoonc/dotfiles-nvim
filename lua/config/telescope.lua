@@ -109,7 +109,14 @@ local function opts(desc)
 end
 
 local builtin = require("telescope.builtin")
-keymap("n", "<C-p>", builtin.git_files, opts("Find Git Files"))
+keymap("n", "<C-p>", function()
+  local result, _ = pcall(builtin.git_files)
+  if not result then
+    vim.notify("Telescope: no git found.")
+    builtin.find_files() -- Fallback to find files
+  end
+end, opts("Find Git Files"))
+
 keymap("n", "<leader>pf", builtin.find_files, opts("Find Files"))
 keymap("n", "<leader>ps", builtin.live_grep, opts("Live Grep"))
 keymap("n", "<leader>ph", builtin.help_tags, opts("View Help Tags"))
