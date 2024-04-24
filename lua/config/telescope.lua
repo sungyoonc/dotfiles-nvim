@@ -126,10 +126,17 @@ keymap("n", "<leader>pF", function()
 end, opts("Find Files (directory of current file)"))
 
 keymap("n", "<leader>ps", builtin.live_grep, opts("Live Grep"))
-keymap("n", "<leader>pS", function ()
-  builtin.grep_string({
-    search = vim.fn.input("Grep> ")
-  })
-end, opts("Grep Search"))
+
+keymap("n", "<leader>pS", function()
+  vim.ui.input({ prompt = "Grep Search", kind = "telescope_grep_string" }, function(input)
+    if input == nil then
+      return
+    end
+
+    builtin.grep_string({
+      search = input,
+    })
+  end)
+end, opts("Grep String"))
 
 keymap("n", "<leader>ph", builtin.help_tags, opts("View Help Tags"))

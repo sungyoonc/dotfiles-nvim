@@ -12,6 +12,16 @@ return {
   {
     "stevearc/dressing.nvim",
     opts = {
+      input = {
+        get_config = function(opts)
+          if opts.kind == "telescope_grep_string" then
+            return {
+              title_pos = "center",
+              relative = "editor",
+            }
+          end
+        end
+      },
       select = {
         get_config = function(opts)
           if opts.kind == "codeaction" then
