@@ -139,7 +139,7 @@ local function jdtls_on_attach(client, bufnr)
     enable_codelens(bufnr)
   end
 
-  vim.lsp.inlay_hint.enable(0, true) -- using bufnr as argument does not work for some reason
+  vim.lsp.inlay_hint.enable(true) -- using bufnr as argument does not work for some reason
 
   -- The following mappings are based on the suggested usage of nvim-jdtls
   -- https://github.com/mfussenegger/nvim-jdtls#usage

@@ -83,11 +83,11 @@ function M.lsp_keymaps(bufnr)
     vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostic = {} } })
   end, opts("Source Action"))
   keymap("n", "<leader>lrn", vim.lsp.buf.rename, opts("Rename"))
-  keymap("n","<leader>li", function ()
+  keymap("n", "<leader>li", function()
     if vim.lsp.inlay_hint.is_enabled(0) then
-      vim.lsp.inlay_hint.enable(0, false)
+      vim.lsp.inlay_hint.enable(false)
     else
-      vim.lsp.inlay_hint.enable(0, true)
+      vim.lsp.inlay_hint.enable(true)
     end
   end, opts("Toggle Inlay Hint"))
 end
@@ -101,7 +101,7 @@ M.on_attach = function(client, bufnr)
 
   -- Enable inlay hints
   if client.server_capabilities.inlayHintProvider then
-    vim.lsp.inlay_hint.enable(bufnr, true)
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
   end
 end
 -- https://github.com/neovim/nvim-lspconfig#suggested-configuration

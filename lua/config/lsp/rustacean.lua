@@ -9,7 +9,7 @@ vim.g.rustaceanvim = {
 
       -- Enable inlay hints
       if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(bufnr, true)
+        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       end
     end,
     default_settings = {

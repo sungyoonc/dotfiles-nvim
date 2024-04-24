@@ -2,7 +2,7 @@ return {
   -- rust-tools
   {
     "mrcjkb/rustaceanvim",
-    version = "^3",
+    version = "*",
     ft = { "rust" },
     init = function()
       require("config.lsp.rustacean")
