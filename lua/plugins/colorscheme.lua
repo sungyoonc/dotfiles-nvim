@@ -1,4 +1,3 @@
-
 ---@param name string
 local function apply(name)
   vim.cmd(string.format([[colorscheme %s]], name))
@@ -11,6 +10,7 @@ local function apply(name)
     hi DiagnosticUnderlineOk gui=undercurl
   ]])
 end
+
 return {
   -- catppuccin
   {
@@ -19,7 +19,15 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      apply("catppuccin-mocha")
+      require("catppuccin").setup({
+        flavour = "mocha",
+        show_end_of_buffer = true,
+      })
+      if os.getenv("DISPLAY") == nil then
+        apply("default")
+      else
+        apply("catppuccin")
+      end
     end,
   },
 }
