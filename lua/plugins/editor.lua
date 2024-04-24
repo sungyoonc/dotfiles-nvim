@@ -148,11 +148,4 @@ return {
       },
     },
   },
-  {
-    "alohaia/fcitx.nvim",
-    event = "InsertEnter",
-    config = function()
-      require("fcitx")({})
-    end,
-  },
 }
