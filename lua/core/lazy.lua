@@ -19,7 +19,6 @@ local lazyconfig = {
     { import = "plugins" },
     { import = "plugins.extras.coding" },
     { import = "plugins.extras.lang" },
-    { import = "plugins.extras.lsp" },
   },
   defaults = {
     lazy = false, -- should plugins be lazy-loaded?
