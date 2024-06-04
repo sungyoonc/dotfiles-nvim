@@ -83,7 +83,7 @@ return {
       require("undotree").setup()
       vim.keymap.set("n", "<leader>u", require("undotree").toggle, { desc = "Toggle Undotree" })
     end,
-    keys = { { "<leader>u", desc = "Toggle Undotree" } },
+    keys = { { "<leader>uu", desc = "Toggle Undotree" } },
   },
 
   -- terminal

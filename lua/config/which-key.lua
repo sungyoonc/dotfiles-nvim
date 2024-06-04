@@ -8,6 +8,7 @@ wk.register({
       c = { name = "+codeaction", ["🚫"] = "which_key_ignore" },
       r = { name = "+rename", ["🚫"] = "which_key_ignore" },
     },
+    u = { name = "+toggle" },
     v = { name = "+diagnostics" },
     p = { name = "+telescope" },
     r = { name = "+repl" },
