@@ -16,6 +16,8 @@ local formatters = {
   "shfmt",
   -- c, java
   "clang-format",
+  -- javascript
+  "prettierd",
 }
 local linters = {
   -- python

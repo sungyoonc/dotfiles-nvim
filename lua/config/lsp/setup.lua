@@ -10,6 +10,7 @@ local servers = {
   "r_language_server",
   "ansiblels", -- ansible
   "markdown_oxide", -- markdown
+  "tsserver", -- javasciprt/typescript
 }
 local custom_servers = {}
 local custom_servers_without_setup = {

@@ -1,6 +1,6 @@
 local conform = require("conform")
 
--- Full Options: https://github.com/stevearc/conform.nvim#options
+-- Full Options: https:/github.com/stevearc/conform.nvim#options
 conform.setup({
   formatters_by_ft = {
     -- Supported: https://github.com/stevearc/conform.nvim#formatters
@@ -8,9 +8,10 @@ conform.setup({
     c = { "clang_format" },
     cpp = { "clang_format" },
     java = { "clang_format" },
-    python = { "ruff_format" }, -- run sequentially
+    python = { "ruff_format" },
     sh = { "shfmt" },
     zsh = { "shfmt" },
+    javascript = { { "prettierd", "prettier" } }, -- run only first available
   },
   -- Set the log level. Use `:ConformInfo` to see the location of the log file.
   log_level = vim.log.levels.ERROR,
