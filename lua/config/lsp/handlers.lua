@@ -2,23 +2,17 @@ local M = {}
 
 -- TODO: backfill this to template
 M.setup = function()
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
   local config = {
     -- toggle virtual text
     virtual_text = true,
     -- show signs
     signs = {
-      active = signs,
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      },
     },
     update_in_insert = true,
     underline = true,
@@ -80,15 +74,11 @@ function M.lsp_keymaps(bufnr)
   keymap("i", "<C-k>", vim.lsp.buf.signature_help, opts("Signature Help"))
   keymap({ "n", "v" }, "<leader>lca", vim.lsp.buf.code_action, opts("Code Action"))
   keymap("n", "<leader>lcA", function()
-    vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostic = {} } })
+    vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } })
   end, opts("Source Action"))
   keymap("n", "<leader>lrn", vim.lsp.buf.rename, opts("Rename"))
   keymap("n", "<leader>li", function()
-    if vim.lsp.inlay_hint.is_enabled(0) then
-      vim.lsp.inlay_hint.enable(false)
-    else
-      vim.lsp.inlay_hint.enable(true)
-    end
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
   end, opts("Toggle Inlay Hint"))
 end
 
