@@ -21,7 +21,7 @@ local formatters = {
 }
 local linters = {
   -- python
-  -- "ruff", (managed by pylsp)
+  "ruff",
   -- c, cpp
   "cpplint",
   -- ansible
