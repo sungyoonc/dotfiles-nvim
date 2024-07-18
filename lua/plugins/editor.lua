@@ -42,6 +42,9 @@ return {
   -- key binding popup
   {
     "folke/which-key.nvim",
+    dependencies = {
+      "echasnovski/mini.icons",
+    },
     event = "VeryLazy",
     init = function()
       vim.o.timeout = true
@@ -113,10 +116,8 @@ return {
       { "<leader>zZ", desc = "Toggle Deep Zen Mode" },
     },
     init = function()
-      require("which-key").register({
-        ["<leader>"] = {
-          z = { name = "+zen" },
-        },
+      require("which-key").add({
+        { "<leader>z", group = "+zen" },
       })
     end,
     config = function()
